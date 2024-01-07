@@ -9,6 +9,7 @@ public class Ordinateur extends Materiel implements Role,Runnable{
     private  String nom;
     private String marque;
     private String adresseIp;
+
     private Imprimante imprimante;
     private String cheminFile;
     private final int time=1000;
@@ -41,21 +42,21 @@ public class Ordinateur extends Materiel implements Role,Runnable{
         this.cheminFile = cheminFile;
     }
 
-    @Override
-    public String defineRole() {
-        return "PC";
-    }
 
     @Override
     public void run() {
         try {
             Thread.sleep(this.time);
+            if(imprimante!=null && cheminFile!=null) {
+                this.imprimante.imprimer(this.cheminFile);
+            }
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        if(imprimante!=null && cheminFile!=null) {
-            
-            this.imprimante.imprimer(this.cheminFile);
-        }
+    }
+
+    @Override
+    public String defineRole() {
+        return "Ordinateur";
     }
 }

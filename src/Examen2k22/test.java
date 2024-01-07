@@ -11,7 +11,7 @@ public class test {
             Thread thread1 = new Thread(ordinateur1);
             Thread thread2 = new Thread(ordinateur2);
             Thread thread3 = new Thread(ordinateur3);
-            Thread thread4 = new Thread(ordinateur4);
+             Thread thread4 = new Thread(ordinateur4);
             Thread thread5 = new Thread(ordinateur5);
             Imprimante imprimante = new Imprimante("123", "imprimante1");
             ordinateur1.setImprimante(imprimante);

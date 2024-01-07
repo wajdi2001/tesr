@@ -1,9 +1,11 @@
 package Examen2k22;
 
-public class Imprimante extends Materiel implements Role{
-    final Object lock =new Object();
+import java.util.concurrent.Semaphore;
 
-    public Imprimante(String numSerie, String libelle) throws NullInfoException {
+public class Imprimante extends Materiel implements Role{
+    public Semaphore lock=new Semaphore(3);
+
+    public Imprimante(String numSerie, String libelle)  {
         super(numSerie, libelle);
     }
 
@@ -14,10 +16,13 @@ public class Imprimante extends Materiel implements Role{
 
 
     public void imprimer(String doc){
-        synchronized (lock){
-
+        try {
+            lock.acquire();
             System.out.println("impression du document "+doc);
-            lock.notifyAll();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }finally {
+            lock.release();
         }
     }
 }
